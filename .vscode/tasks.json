@@ -1,0 +1,65 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build DevUtils",
+			"type": "npm",
+			"script": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Start DevUtils",
+			"type": "npm",
+			"script": "start",
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"dependsOn": "Build DevUtils",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Dev Mode",
+			"type": "npm",
+			"script": "dev",
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared"
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Launch DevUtils",
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"start"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

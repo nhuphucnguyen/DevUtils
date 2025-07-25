@@ -1,0 +1,57 @@
+{
+  "name": "devutils",
+  "version": "1.0.0",
+  "description": "A modern developer toolbox with utilities like base64 encoder/decoder and JWT viewer",
+  "main": "src/main/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "npm run build && electron .",
+    "build": "webpack --mode=development",
+    "build:prod": "webpack --mode=production",
+    "dist": "npm run build:prod && electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["developer-tools", "utilities", "base64", "jwt", "electron"],
+  "author": "DevUtils Team",
+  "license": "MIT",
+  "build": {
+    "appId": "com.devutils.app",
+    "productName": "DevUtils",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "electron": "^37.2.4",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.100.2",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "lucide-react": "^0.525.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
