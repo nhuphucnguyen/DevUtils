@@ -98,7 +98,7 @@ class WelcomeTool extends BaseTool {
                 <div class="feature-grid">
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <span style="color: white; font-size: 20px;">🔒</span>
+                            <img src="../assets/icons/encode.svg" alt="Encode" style="width: 28px; height: 28px;">
                         </div>
                         <h3 class="feature-title">Base64 Encoder</h3>
                         <p class="feature-description">Encode text and data to Base64 format</p>
@@ -106,7 +106,7 @@ class WelcomeTool extends BaseTool {
                     
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <span style="color: white; font-size: 20px;">🔓</span>
+                            <img src="../assets/icons/decode.svg" alt="Decode" style="width: 28px; height: 28px;">
                         </div>
                         <h3 class="feature-title">Base64 Decoder</h3>
                         <p class="feature-description">Decode Base64 strings back to original format</p>
@@ -114,7 +114,7 @@ class WelcomeTool extends BaseTool {
                     
                     <div class="feature-card">
                         <div class="feature-icon">
-                            <span style="color: white; font-size: 20px;">🔍</span>
+                            <img src="../assets/icons/search.svg" alt="Search" style="width: 28px; height: 28px;">
                         </div>
                         <h3 class="feature-title">JWT Viewer</h3>
                         <p class="feature-description">Decode and inspect JWT tokens</p>

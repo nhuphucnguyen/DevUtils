@@ -52,11 +52,11 @@
         }
         
         .sidebar {
-            width: 80px;
+            width: 70px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-right: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 20px 10px;
+            padding: 20px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -71,12 +71,12 @@
         }
         
         .tool-button {
-            width: 50px;
-            height: 50px;
-            padding: 12px;
+            width: 44px;
+            height: 44px;
+            padding: 4px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
+            border-radius: 10px;
             color: white;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -243,6 +243,16 @@
             line-height: 1;
         }
         
+        .icon-svg {
+            width: 32px;
+            height: 32px;
+            transition: all 0.2s ease;
+        }
+        
+        .tool-button:hover .icon-svg {
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+        }
+        
         .welcome-content {
             text-align: center;
             padding: 60px 20px;
@@ -360,25 +370,25 @@
                 <ul class="tool-list" id="toolList">
                     <li class="tool-item">
                         <button class="tool-button" data-tool="welcome">
-                            <span class="icon">🏠</span>
+                            <img src="../assets/icons/home.svg" alt="Home" class="icon-svg">
                             <span class="tooltip">Welcome</span>
                         </button>
                     </li>
                     <li class="tool-item">
                         <button class="tool-button" data-tool="base64-encode">
-                            <span class="icon">�</span>
+                            <img src="../assets/icons/encode.svg" alt="Encode" class="icon-svg">
                             <span class="tooltip">Base64 Encoder</span>
                         </button>
                     </li>
                     <li class="tool-item">
                         <button class="tool-button" data-tool="base64-decode">
-                            <span class="icon">�</span>
+                            <img src="../assets/icons/decode.svg" alt="Decode" class="icon-svg">
                             <span class="tooltip">Base64 Decoder</span>
                         </button>
                     </li>
                     <li class="tool-item">
                         <button class="tool-button" data-tool="jwt-viewer">
-                            <span class="icon">🔍</span>
+                            <img src="../assets/icons/search.svg" alt="Search" class="icon-svg">
                             <span class="tooltip">JWT Viewer</span>
                         </button>
                     </li>
