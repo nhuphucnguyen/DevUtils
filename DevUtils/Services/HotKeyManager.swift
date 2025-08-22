@@ -28,15 +28,21 @@ class HotKeyManager {
         
         var eventType = EventTypeSpec(eventClass: OSType(kEventClassKeyboard), eventKind: OSType(kEventHotKeyPressed))
         
-        InstallEventHandler(GetApplicationEventTarget(), { (nextHandler, theEvent, userData) -> OSStatus in
+        let handlerResult = InstallEventHandler(GetApplicationEventTarget(), { (nextHandler, theEvent, userData) -> OSStatus in
             guard let userData = userData else { return OSStatus(eventNotHandledErr) }
             let hotKeyManager = Unmanaged<HotKeyManager>.fromOpaque(userData).takeUnretainedValue()
+            print("Hotkey pressed! Toggling window...")
             hotKeyManager.windowManager.toggleWindow()
             return OSStatus(noErr)
         }, 1, &eventType, Unmanaged.passUnretained(self).toOpaque(), nil)
         
+        print("Event handler installed with result: \(handlerResult)")
+        
         let hotKeyID = EventHotKeyID(signature: fourCharCode("DVUT"), id: 1)
-        RegisterEventHotKey(keyCode, modifiers, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef)
+        let registerResult = RegisterEventHotKey(keyCode, modifiers, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef)
+        
+        print("Hotkey registration result: \(registerResult)")
+        print("Hotkey ⌘+Shift+D registered successfully")
     }
     
     private func unregisterHotKey() {

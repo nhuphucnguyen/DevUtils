@@ -19,8 +19,6 @@ class WindowManager: NSObject {
     }
     
     private func setupWindow() {
-        print("Creating window with frame: \(appState.windowFrame)")
-        
         window = NSWindow(
             contentRect: appState.windowFrame,
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -33,12 +31,9 @@ class WindowManager: NSObject {
         window?.delegate = self
         window?.center()
         
-        print("Window created: \(window != nil)")
-        print("Window frame after creation: \(window?.frame ?? CGRect.zero)")
-        
-        // Try without floating level and accessory policy first
-        // NSApp.setActivationPolicy(.accessory)
-        // window?.level = .floating
+        // Configure as menu bar app - hide from dock but use normal window level
+        NSApp.setActivationPolicy(.accessory)
+        window?.level = .normal
         
         // Make window appear in all spaces
         window?.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
@@ -48,27 +43,15 @@ class WindowManager: NSObject {
         let hostingView = NSHostingView(rootView: content())
         hostingView.frame = window?.contentView?.frame ?? CGRect(x: 0, y: 0, width: 600, height: 500)
         window?.contentView = hostingView
-        
-        print("Content view set with SwiftUI NSHostingView")
     }
     
     func showWindow() {
-        guard let window = window else { 
-            print("ERROR: Window is nil!")
-            return 
-        }
-        
-        print("Showing window...")
-        print("Window frame: \(window.frame)")
-        print("Window isVisible: \(window.isVisible)")
+        guard let window = window else { return }
         
         window.setFrame(appState.windowFrame, display: true)
         window.makeKeyAndOrderFront(nil)
         window.orderFrontRegardless()
         NSApp.activate(ignoringOtherApps: true)
-        
-        print("After show - Window isVisible: \(window.isVisible)")
-        print("Window level: \(window.level.rawValue)")
     }
     
     func hideWindow() {

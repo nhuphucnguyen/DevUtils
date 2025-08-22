@@ -37,6 +37,11 @@ struct ContentView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.willTerminateNotification)) { _ in
             appState.saveWindowState()
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("SwitchToTab"))) { notification in
+            if let tabIndex = notification.object as? Int {
+                appState.selectedTab = tabIndex
+            }
+        }
     }
 }
 
