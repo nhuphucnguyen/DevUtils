@@ -19,6 +19,8 @@ class WindowManager: NSObject {
     }
     
     private func setupWindow() {
+        print("Creating window with frame: \(appState.windowFrame)")
+        
         window = NSWindow(
             contentRect: appState.windowFrame,
             styleMask: [.titled, .closable, .miniaturizable, .resizable],
@@ -31,28 +33,42 @@ class WindowManager: NSObject {
         window?.delegate = self
         window?.center()
         
-        // Hide from dock and make window float above other apps
-        NSApp.setActivationPolicy(.accessory)
-        window?.level = .floating
+        print("Window created: \(window != nil)")
+        print("Window frame after creation: \(window?.frame ?? CGRect.zero)")
+        
+        // Try without floating level and accessory policy first
+        // NSApp.setActivationPolicy(.accessory)
+        // window?.level = .floating
         
         // Make window appear in all spaces
         window?.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
     }
     
     func setContentView<Content: View>(@ViewBuilder content: () -> Content) {
-        window?.contentView = NSHostingView(rootView: content())
+        let hostingView = NSHostingView(rootView: content())
+        hostingView.frame = window?.contentView?.frame ?? CGRect(x: 0, y: 0, width: 600, height: 500)
+        window?.contentView = hostingView
+        
+        print("Content view set with SwiftUI NSHostingView")
     }
     
     func showWindow() {
-        guard let window = window else { return }
-        
-        if !window.isVisible {
-            window.setFrame(appState.windowFrame, display: true)
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
-        } else {
-            window.orderOut(nil)
+        guard let window = window else { 
+            print("ERROR: Window is nil!")
+            return 
         }
+        
+        print("Showing window...")
+        print("Window frame: \(window.frame)")
+        print("Window isVisible: \(window.isVisible)")
+        
+        window.setFrame(appState.windowFrame, display: true)
+        window.makeKeyAndOrderFront(nil)
+        window.orderFrontRegardless()
+        NSApp.activate(ignoringOtherApps: true)
+        
+        print("After show - Window isVisible: \(window.isVisible)")
+        print("Window level: \(window.level.rawValue)")
     }
     
     func hideWindow() {

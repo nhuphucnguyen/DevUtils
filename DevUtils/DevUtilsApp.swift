@@ -8,45 +8,41 @@
 import SwiftUI
 import AppKit
 
+class AppDelegate: NSObject, NSApplicationDelegate {
+    var appState: AppState!
+    var menuBarManager: MenuBarManager!
+    var windowManager: WindowManager!
+    var hotKeyManager: HotKeyManager!
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        appState = AppState()
+        windowManager = WindowManager(appState: appState)
+        menuBarManager = MenuBarManager(appState: appState)
+        hotKeyManager = HotKeyManager(windowManager: windowManager)
+        
+        setupApp()
+    }
+    
+    private func setupApp() {
+        print("Setting up app...")
+        
+        windowManager.setContentView {
+            ContentView()
+                .environmentObject(appState)
+        }
+        
+        print("Content view configured, showing window...")
+        windowManager.showWindow()
+    }
+}
+
 @main
 struct DevUtilsApp: App {
-    @StateObject private var appState = AppState()
-    private let menuBarManager: MenuBarManager
-    private let windowManager: WindowManager
-    private let hotKeyManager: HotKeyManager
-    
-    init() {
-        let appState = AppState()
-        let windowManager = WindowManager(appState: appState)
-        let menuBarManager = MenuBarManager(appState: appState)
-        let hotKeyManager = HotKeyManager(windowManager: windowManager)
-        
-        self._appState = StateObject(wrappedValue: appState)
-        self.windowManager = windowManager
-        self.menuBarManager = menuBarManager
-        self.hotKeyManager = hotKeyManager
-    }
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         Settings {
             EmptyView()
-                .onAppear {
-                    setupApp()
-                }
-        }
-        .onChange(of: appState.isMainWindowVisible) { isVisible in
-            if isVisible {
-                windowManager.showWindow()
-            } else {
-                windowManager.hideWindow()
-            }
-        }
-    }
-    
-    private func setupApp() {
-        windowManager.setContentView {
-            ContentView()
-                .environmentObject(appState)
         }
     }
 }

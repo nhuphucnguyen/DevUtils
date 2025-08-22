@@ -12,21 +12,21 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $appState.selectedTab) {
-            Text("Base64 Encoder/Decoder")
+            Base64View()
                 .tabItem {
                     Image(systemName: "textformat.abc")
                     Text("Base64")
                 }
                 .tag(0)
             
-            Text("JWT Viewer")
+            JWTView()
                 .tabItem {
                     Image(systemName: "key")
                     Text("JWT")
                 }
                 .tag(1)
             
-            Text("JSON Formatter")
+            JSONView()
                 .tabItem {
                     Image(systemName: "doc.text")
                     Text("JSON")
