@@ -88,26 +88,34 @@ class WindowManager: NSObject {
 
 extension WindowManager: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
-        appState.isMainWindowVisible = false
-        appState.saveWindowState()
+        DispatchQueue.main.async {
+            self.appState.isMainWindowVisible = false
+            self.appState.saveWindowState()
+        }
     }
     
     func windowDidResize(_ notification: Notification) {
         if let window = window {
-            appState.windowFrame = window.frame
+            DispatchQueue.main.async {
+                self.appState.windowFrame = window.frame
+            }
         }
     }
     
     func windowDidMove(_ notification: Notification) {
         if let window = window {
-            appState.windowFrame = window.frame
+            DispatchQueue.main.async {
+                self.appState.windowFrame = window.frame
+            }
         }
     }
     
     func windowShouldClose(_ sender: NSWindow) -> Bool {
         // Don't actually close, just hide
         hideWindow()
-        appState.isMainWindowVisible = false
+        DispatchQueue.main.async {
+            self.appState.isMainWindowVisible = false
+        }
         return false
     }
 }

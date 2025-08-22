@@ -26,10 +26,10 @@ struct Base64View: View {
             Spacer()
         }
         .padding()
-        .onChange(of: utility.inputText) { _ in
+        .onChange(of: utility.inputText) {
             utility.process()
         }
-        .onChange(of: utility.isEncoding) { _ in
+        .onChange(of: utility.isEncoding) {
             utility.process()
         }
     }

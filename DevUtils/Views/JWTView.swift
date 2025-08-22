@@ -33,7 +33,7 @@ struct JWTView: View {
             Spacer()
         }
         .padding()
-        .onChange(of: utility.inputToken) { _ in
+        .onChange(of: utility.inputToken) {
             utility.parseJWT()
         }
     }

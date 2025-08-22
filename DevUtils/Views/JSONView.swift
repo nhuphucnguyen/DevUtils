@@ -26,14 +26,14 @@ struct JSONView: View {
             Spacer()
         }
         .padding()
-        .onChange(of: utility.inputText) { _ in
+        .onChange(of: utility.inputText) {
             if !utility.inputText.isEmpty {
                 utility.formatJSON()
             } else {
                 utility.clear()
             }
         }
-        .onChange(of: utility.indentLevel) { _ in
+        .onChange(of: utility.indentLevel) {
             if !utility.inputText.isEmpty && utility.isValid {
                 utility.formatJSON()
             }
